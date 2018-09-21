@@ -2,11 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { AppRoutingModule } from './app.routing';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
 
 @NgModule({
   declarations: [
@@ -15,13 +19,15 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     RegisterComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
-  bootstrap: [LoginComponent],
+  bootstrap: [AppComponent],
   // exports: []
 })
 export class AppModule { }
