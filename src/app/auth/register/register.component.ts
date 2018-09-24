@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../services/user.class';
+import { User } from './../services/user.class';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { User } from '../services/user.class';
 export class RegisterComponent implements OnInit {
     public user;
     public submitting: boolean = false;
-    constructor() {
+    constructor(public router: Router) {
         this.user = new User({});
     }
 
@@ -20,7 +21,14 @@ export class RegisterComponent implements OnInit {
 
     register() {
         this.submitting = true;
+
         setTimeout(() => {
+            this.router.navigate(['/auth/login'], {
+                queryParams: {
+                    name: 'ramesh',
+                    address: 'kapan'
+                }
+            });
             this.submitting = false;
         }, 4000);
     }

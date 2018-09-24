@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { User } from './../services/user.class';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,12 +9,20 @@ import { User } from './../services/user.class';
 })
 export class LoginComponent {
   public user;
+  public queryData: any
   // public errUsername: string;
   // public errPass: string;
 
-  constructor() {
+  constructor(
+    public activeRoute: ActivatedRoute
+  ) {
     this.user = new User({ age: 344, phone: 444, email: 'sdlfj@gmail.com' });
     console.log('this.user here', this.user);
+
+    this.queryData = activeRoute.queryParams.subscribe((data) => {
+      console.log("data", data);
+    })
+
   }
 
 
