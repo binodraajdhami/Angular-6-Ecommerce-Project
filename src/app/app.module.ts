@@ -1,32 +1,28 @@
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 import { NgModule, Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app.routing';
 
 import { AppComponent } from './app.component';
-// import { LoginComponent } from './login/login.component';
-// import { RegisterComponent } from './register/register.component';
-// import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-// import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthModule } from './auth/auth.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    // LoginComponent,
-    // RegisterComponent,
-    // ForgotPasswordComponent,
-    // ResetPasswordComponent,
-    PageNotFoundComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,
-    AuthModule
+    AuthModule,
+    SharedModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],

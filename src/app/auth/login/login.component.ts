@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { User } from './../services/user.class';
+import { User, AuthService } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { MsgService } from './../../shared/services/msg.service';
+
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,9 @@ export class LoginComponent {
   // public errPass: string;
 
   constructor(
-    public activeRoute: ActivatedRoute
+    public activeRoute: ActivatedRoute,
+    public msgService: MsgService,
+    public authService: AuthService
   ) {
     this.user = new User({ age: 344, phone: 444, email: 'sdlfj@gmail.com' });
     console.log('this.user here', this.user);
@@ -27,13 +31,17 @@ export class LoginComponent {
 
 
   loginNow() {
-    // if (!this.user.username) {
-    //   this.errUsername = 'user is missing';
-    // }
-    // if (!this.user.password) {
-    //   this.errPass = 'password is missing';
-    // }
-    console.log('this iuser', this.user);
+    // this.msgService.showSuccess('done welldone')
+    this.authService.login(this.user)
+      .then(
+        (data: User) => {
+          console.log('data', data);
+          this.msgService.showSuccess(data.username)
+        })
+      .catch((err) => {
+        console.log('error here',err);
+        this.msgService.showError(err);
+      })
   }
 
 }
