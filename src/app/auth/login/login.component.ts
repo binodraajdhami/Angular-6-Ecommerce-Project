@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { User, AuthService } from '../services/user.service';
 import { ActivatedRoute } from '@angular/router';
 import { MsgService } from './../../shared/services/msg.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -21,27 +22,50 @@ export class LoginComponent {
     public authService: AuthService
   ) {
     this.user = new User({ age: 344, phone: 444, email: 'sdlfj@gmail.com' });
-    console.log('this.user here', this.user);
 
     this.queryData = activeRoute.queryParams.subscribe((data) => {
-      console.log("data", data);
     })
 
   }
+  // getbigbangtheroy(name) {
+  //   return new Observable((observer) => {
+  //     if (!name) {
+  //       observer.error('no episode name');
+  //       return;
+  //     }
+  //     let i = 1;
+  //     setInterval(() => {
+  //       observer.next('episode ' + i)
+  //       i++;
 
+  //     }, 2000)
+  //   })
+  // }
+
+  // callForNotePromise(note) {
+  //   return new Promise((resolve, reject) => {
+  //     setInterval(() => {
+  //       console.log('interval repeat');
+  //       resolve({
+  //         note: note
+  //       })
+  //     }, 2000)
+  //   })
+  // }
 
   loginNow() {
-    // this.msgService.showSuccess('done welldone')
-    this.authService.login(this.user)
-      .then(
-        (data: User) => {
+     this.authService.login(this.user)
+      .subscribe(
+        (data: any) => {
           console.log('data', data);
-          this.msgService.showSuccess(data.username)
+          this.msgService.showSuccess('welcome ' + data.user.username);
+        },
+        (err: any) => {
+          console.log('err', err);
         })
-      .catch((err) => {
-        console.log('error here',err);
-        this.msgService.showError(err);
-      })
+
+
+
   }
 
 }

@@ -12,7 +12,6 @@ export class User {
 
     constructor(option: any) {
         for (let key in option) {
-            console.log('key ', key)
             this[key] = option[key] || '';
         }
     }
@@ -20,31 +19,41 @@ export class User {
 
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from "rxjs";
+import { environment } from './../../../environments/environment';
+import { BaseService } from "../../shared/services/base.service";
 
 @Injectable()
-export class AuthService {
+export class AuthService extends BaseService {
 
-    url: string;
     constructor(public http: HttpClient) {
-        this.url = 'http://localhost:4040/login'
+        super();
     }
+
 
     login(data: User) {
-        return new Promise((resolve, reject) => {
+        // return new Observable((observer) => {
 
-            this.http.post(this.url, data, {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                })
-            }).subscribe((data: any) => {
-                resolve(data);
-            }, (err) => {
-                reject(err);
-            })
-        })
+        //     this.http.post(this.url, data, {
+        //         headers: new HttpHeaders({
+        //             'Content-Type': 'application/json',
+        //         })http://localhost:4040/
+        //     })
+        //         .subscribe(
+        //             (data: any) => {
+        //                 observer.next(data);
+        //             },
+        //             (err) => {
+        //                 observer.error(err);
+        //             },
+        //             () => {
+        //             })
+        // })
+        return this.http.post(this.url + 'login', data, this.headersOnly())
     }
 
-    // toUpperCase(str: string) {
-    //     return str.toUpperCase();
-    // }
+    register(data: User) {
+        this.http.post(this.url + 'register', data, this.headersOnly())
+    }
+
 }
