@@ -1,6 +1,6 @@
 
 export class Product {
-
+    _id: string | number;
     name?: string;
     category?: string;
     brand?: string;
@@ -43,10 +43,12 @@ export class ProductService extends BaseService {
     get() {
         this.http.get(this.url + 'product', this.headersWithToken());
     }
-    update() {
+    update(data: Product) {
+        this.http.put(this.url + 'product/' + data._id, data, this.headersWithToken());
 
     }
-    remove() {
+    remove(id) {
+        this.http.delete(this.url + 'product/' + id, this.headersWithToken());
 
     }
 

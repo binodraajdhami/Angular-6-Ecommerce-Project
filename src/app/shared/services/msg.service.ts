@@ -16,9 +16,16 @@ export class MsgService {
     showSuccess(msg) {
         this.toastr.success(msg);
     }
-    showError(msg) {
+    showError(error: any) {
+        // debugger;
         // TODO complete error handling for FE
-        this.toastr.error(msg);
+        if (error.error) {
+            if (error.error.message._message) {
+                this.toastr.error(error.error.message._message)
+            } else {
+                this.toastr.error(error.error.message);
+            }
+        }
     }
     showWarning(msg) {
         this.toastr.warning(msg);

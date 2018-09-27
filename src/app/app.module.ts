@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app.routing';
 import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
+import { ProductModule } from './product/product.module';
+import { UserModule } from './user/user.module';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     AppRoutingModule,
     AuthModule,
+    ProductModule,
+    UserModule,
     SharedModule,
     ToastrModule.forRoot()
   ],

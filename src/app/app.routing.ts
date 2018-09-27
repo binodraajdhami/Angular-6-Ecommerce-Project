@@ -14,6 +14,14 @@ const allRoute: Routes = [
         loadChildren: './auth/auth.module#AuthModule'
     },
     {
+        path: 'product',
+        loadChildren: './product/product.module#ProductModule'
+    },
+    {
+        path: 'user',
+        loadChildren: './user/user.module#UserModule'
+    },
+    {
         path: '**',
         component: PageNotFoundComponent
     }

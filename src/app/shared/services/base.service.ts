@@ -24,7 +24,7 @@ export class BaseService {
         let option = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
-                'x-access-token': 'sdfjkkfjsdlkfsdjkfkld'
+                'x-access-token': localStorage.getItem('token')
 
             })
         }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../services/user.service';
+import { User, AuthService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { MsgService } from '../../shared/services/msg.service';
 
 
 @Component({
@@ -11,7 +12,11 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
     public user;
     public submitting: boolean = false;
-    constructor(public router: Router) {
+    constructor(
+        public router: Router,
+        private authService: AuthService,
+        private msgService: MsgService
+    ) {
         this.user = new User({});
     }
 
@@ -21,16 +26,18 @@ export class RegisterComponent implements OnInit {
 
     register() {
         this.submitting = true;
+        this.authService.register(this.user).subscribe(
+            (data: any) => {
+                this.router.navigate(['/auth/login'])
+                this.msgService.showSuccess('user registration successfull Please check your email');
+                this.submitting = false;
+            },
+            err => {
+                this.submitting = false;
+                this.msgService.showError(err);
+            }
+        )
 
-        setTimeout(() => {
-            this.router.navigate(['/auth/login'], {
-                queryParams: {
-                    name: 'ramesh',
-                    address: 'kapan'
-                }
-            });
-            this.submitting = false;
-        }, 4000);
     }
 
 }

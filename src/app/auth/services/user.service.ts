@@ -53,7 +53,7 @@ export class AuthService extends BaseService {
     }
 
     register(data: User) {
-        this.http.post(this.url + 'register', data, this.headersOnly())
+        return this.http.post(this.url + 'register', data, this.headersOnly())
     }
 
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { User, AuthService } from '../services/user.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, Route } from '@angular/router';
 import { MsgService } from './../../shared/services/msg.service';
 import { Observable } from 'rxjs';
 
@@ -19,7 +19,8 @@ export class LoginComponent {
   constructor(
     public activeRoute: ActivatedRoute,
     public msgService: MsgService,
-    public authService: AuthService
+    public authService: AuthService,
+    public router: Router
   ) {
     this.user = new User({ age: 344, phone: 444, email: 'sdlfj@gmail.com' });
 
@@ -54,14 +55,18 @@ export class LoginComponent {
   // }
 
   loginNow() {
-     this.authService.login(this.user)
+    this.authService.login(this.user)
       .subscribe(
         (data: any) => {
-          console.log('data', data);
+          // console.log('data', data);
           this.msgService.showSuccess('welcome ' + data.user.username);
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', JSON.stringify(data.user));
+          this.router.navigate(['/user/dashboard'])
         },
         (err: any) => {
           console.log('err', err);
+          this.msgService.showError(err);
         })
 
 
