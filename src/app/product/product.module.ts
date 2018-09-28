@@ -7,12 +7,14 @@ import { ListProductComponent } from './list-product/list-product.component';
 import { ProductRoutingModule } from './product.routing';
 import { ProductService } from './services/product.service';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     ProductRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
   declarations: [
     AddProductComponent,

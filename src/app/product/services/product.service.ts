@@ -41,14 +41,18 @@ export class ProductService extends BaseService {
     }
 
     get() {
-        this.http.get(this.url + 'product', this.headersWithToken());
+        return this.http.get(this.url + 'product', this.headersWithToken());
+    }
+    getById(id) {
+        return this.http.get(this.url + 'product/' + id, this.headersWithToken());
+
     }
     update(data: Product) {
-        this.http.put(this.url + 'product/' + data._id, data, this.headersWithToken());
+        return this.http.put(this.url + 'product/' + data._id, data, this.headersWithToken());
 
     }
     remove(id) {
-        this.http.delete(this.url + 'product/' + id, this.headersWithToken());
+        return this.http.delete(this.url + 'product/' + id, this.headersWithToken());
 
     }
 

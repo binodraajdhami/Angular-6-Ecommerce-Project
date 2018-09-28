@@ -1,3 +1,39 @@
-<p>
-  edit-product works!
-</p>
+<div class="container">
+  <div *ngIf="loading">
+    <app-loader></app-loader>
+
+  </div>
+  <div *ngIf="!loading">
+    <h2>Edit Product</h2>
+    <form #editProductForm="ngForm" class="form-group width">
+      <label for="name">Name</label>
+      <input class="form-control" type="text" name="name" placeholder="Full Name" [(ngModel)]="product.name">
+
+      <label for="brand">Brand</label>
+      <input class="form-control" type="text" name="brand" placeholder="brand" [(ngModel)]=product.brand>
+      <label for="category">category</label>
+      <input class="form-control" type="text" name="category" placeholder="category" [(ngModel)]="product.category"
+        required #category="ngModel">
+      <div class="danger" *ngIf="category.invalid && (category.touched || category.dirty)">
+        <div *ngIf="category.errors.required">
+          category is required*
+        </div>
+      </div>
+      <label for="description">Description</label>
+      <input class="form-control" type="text" placeholder="description or email" name="description" [(ngModel)]="product.description">
+      <label for="price">price</label>
+      <input class="form-control" type="number" placeholder=" price" name="price" [(ngModel)]="product.price">
+      <label for="quantity">quantity</label>
+      <input class="form-control" type="number" placeholder=" quantity" name="quantity" [(ngModel)]="product.quantity">
+      <label for="manuDate">Manufacture Date</label>
+      <input class="form-control" type="date" placeholder=" manuDate" name="manuDate" [(ngModel)]="product.manuDate">
+      <label for="tags">Tags</label>
+      <input class="form-control" type="text" placeholder=" tags" name="tags" [(ngModel)]="product.tags">
+      <br>
+      <button [disabled]="!editProductForm.valid" *ngIf="!submitting" (click)="edit()" class="btn btn-primary">
+        submit
+      </button>
+      <button disabled class="btn btn-info" *ngIf="submitting">submitting... </button>
+    </form>
+  </div>
+</div>
