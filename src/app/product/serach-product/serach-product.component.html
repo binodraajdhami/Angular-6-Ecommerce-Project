@@ -1,3 +1,86 @@
-<p>
-  serach-product works!
-</p>
+<div class="container" *ngIf="!showResult">
+  <form class="form-group" #searchForm="ngForm">
+    <label for="cateogry">Category</label>
+    <select class="form-control" name="cateogry" (change)="prepareName()" [(ngModel)]="product.category">
+      <option value="">( Select Category )</option>
+      <option [value]="cat" *ngFor="let cat of categoriesOnly">{{cat}}</option>
+    </select>
+    <div *ngIf="product.category">
+      <label for="name">Name</label>
+      <select class="form-control" name="name" [(ngModel)]="product.name">
+        <option value="">( Select Name )</option>
+        <option [value]="name.name" *ngFor="let name of namesOnly">{{name.name}}</option>
+      </select>
+    </div>
+
+    <label for="brand">Brand</label>
+    <input class="form-control" type="text" name="brand" placeholder="brand" [(ngModel)]=product.brand>
+
+    <div class="row">
+      <div class="col-md-6">
+        <label for="minPrice">Minimum Price</label>
+        <input class="form-control" type="number" placeholder=" minPrice" name="minPrice" [(ngModel)]="product.minPrice">
+      </div>
+      <div class="col-md-6">
+        <label for="maxPrice">Maximum Price</label>
+        <input class="form-control" type="number" placeholder=" maxPrice" name="maxPrice" [(ngModel)]="product.maxPrice">
+      </div>
+    </div>
+
+    <label for="fromDate">Date</label>
+    <input class="form-control" type="date" name="fromdDate" [(ngModel)]="product.fromDate">
+
+    <input type="checkbox" name="multipleDate" [checked]="multiple" [(ngModel)]="multiple"> show multiple date
+
+    <div *ngIf="multiple">
+      <label for="toDate">To Date</label>
+      <input class="form-control" type="date" name="toDate" [(ngModel)]="product.toDate">
+    </div>
+    <br>
+    <label for="tags">Tags</label>
+    <input class="form-control" type="text" placeholder=" tags" name="tags" [(ngModel)]="product.tags">
+
+  </form>
+  <button *ngIf="!submitting" (click)="search()" class="btn btn-primary">search</button>
+  <button *ngIf="submitting" class="btn btn-info">searching...</button>
+
+
+</div>
+
+<!-- for showing result -->
+<div class="container" *ngIf="showResult">
+
+  <div class="row">
+    <div>
+      <h2>search result </h2>
+    </div>
+    <div class="pull-right">
+      <button class="btn btn-success" (click)="searchAgain()">search again</button>
+    </div>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>S.N</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Category</th>
+        <th>Created At</th>
+        <th>Quality</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let prod of products;let i= index">
+        <td>{{i+1}}</td>
+        <td>{{prod.name |uppercase}}</td>
+        <td>{{prod.brand}}</td>
+        <td>{{prod.category}}</td>
+        <td>{{prod.createdAt | date:'mediumDate'}}</td>
+        <td>{{prod.quality}}</td>
+        <td>{{prod.price}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

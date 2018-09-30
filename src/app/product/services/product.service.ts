@@ -55,5 +55,9 @@ export class ProductService extends BaseService {
         return this.http.delete(this.url + 'product/' + id, this.headersWithToken());
 
     }
+    search(data) {
+        return this.http.post(this.url + 'product/search', data, this.headersWithToken());
+
+    }
 
 }
