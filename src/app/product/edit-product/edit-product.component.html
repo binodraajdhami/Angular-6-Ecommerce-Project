@@ -30,7 +30,12 @@
       <label for="tags">Tags</label>
       <input class="form-control" type="text" placeholder=" tags" name="tags" [(ngModel)]="product.tags">
       <br>
-      <button [disabled]="!editProductForm.valid" *ngIf="!submitting" (click)="edit()" class="btn btn-primary">
+      <label for="image">Image</label>
+      <img src="{{imgUrl}}images/{{product.image}}" width="200px" alt="">
+      <br>
+      <label for="image">Choose New Image</label>
+      <input type="file" (change)="fileChangeEvent($event)" name="imageName" [(ngModel)]="product.image">
+      <button [disabled]="!editProductForm.valid" *ngIf="!submitting" (click)="upload()" class="btn btn-primary">
         submit
       </button>
       <button disabled class="btn btn-info" *ngIf="submitting">submitting... </button>

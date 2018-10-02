@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { MsgService } from '../../shared/services/msg.service';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-list-product',
@@ -11,11 +12,14 @@ import { Router } from '@angular/router';
 export class ListProductComponent implements OnInit {
   products = [];
   loading: boolean = true;
+  imgUrl: String;
   constructor(
     public productService: ProductService,
     public msgService: MsgService,
     public router: Router
-  ) { }
+  ) {
+    this.imgUrl = environment.imgUrl;
+  }
 
   ngOnInit() {
     this.productService.get().subscribe(

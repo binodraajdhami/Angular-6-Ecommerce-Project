@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { MsgService } from '../../shared/services/msg.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-edit-product',
@@ -13,6 +14,8 @@ export class EditProductComponent implements OnInit {
   product;
   loading: boolean = true;
   submitting: boolean = false;
+  filesToUpload = [];
+  imgUrl: string;
   constructor(
     public router: Router,
     public activeRoute: ActivatedRoute,
@@ -20,6 +23,8 @@ export class EditProductComponent implements OnInit {
     public msgService: MsgService
   ) {
     this.productId = this.activeRoute.snapshot.params.id;
+    this.imgUrl = environment.imgUrl;
+
   }
 
   ngOnInit() {
@@ -49,6 +54,23 @@ export class EditProductComponent implements OnInit {
       }, err => {
         this.submitting = false;
         this.msgService.showError(err);
+      }
+    )
+  }
+  fileChangeEvent(eve) {
+    this.filesToUpload = eve.target.files;
+  }
+
+  upload() {
+    this.submitting = true;
+    this.productService.upload("PUT", this.filesToUpload, this.product).subscribe(
+      data => {
+        this.submitting = false;
+        this.msgService.showSuccess("product updated sucessfully");
+        this.router.navigate(['/product/list']);
+      }, error => {
+        this.submitting = false;
+        this.msgService.showError(error);
       }
     )
   }

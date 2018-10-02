@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   baseUrl: 'http://localhost:4040/',
-  imgUr: '',
+  imgUrl: 'http://localhost:4040/img/',
   socketUrl: ''
 };
 

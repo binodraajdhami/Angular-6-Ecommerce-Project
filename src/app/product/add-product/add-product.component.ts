@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class AddProductComponent implements OnInit {
   product;
   submitting: boolean = false;
+  filesToUpload: Array<any>;
   constructor(
     public productService: ProductService,
     public msgService: MsgService,
@@ -25,6 +26,23 @@ export class AddProductComponent implements OnInit {
   add() {
     this.submitting = true;
     this.productService.add(this.product).subscribe(
+      data => {
+        this.submitting = false;
+        this.msgService.showSuccess("product added sucessfully");
+        this.router.navigate(['/product/list']);
+      }, error => {
+        this.submitting = false;
+        this.msgService.showError(error);
+      }
+    )
+  }
+  fileChangeEvent(eve) {
+    this.filesToUpload = eve.target.files;
+  }
+
+  upload() {
+    this.submitting = true;
+    this.productService.upload("POST", this.filesToUpload, this.product).subscribe(
       data => {
         this.submitting = false;
         this.msgService.showSuccess("product added sucessfully");

@@ -60,4 +60,37 @@ export class ProductService extends BaseService {
 
     }
 
+    upload(method: any, files: any, data: any) {
+        return new Observable((observer) => {
+            const xhttp = new XMLHttpRequest();
+            const formData = new FormData();
+            if (files.length) {
+                formData.append('image', files[0], files[0].name);
+            }
+            if (data !== undefined) {
+                for (let key in data) {
+                    formData.append(key, data[key]);
+                }
+            }
+
+            xhttp.onreadystatechange = () => {
+                if (xhttp.readyState == 4) {
+                    if (xhttp.status == 200) {
+                        observer.next(xhttp.response)
+                    } else {
+                        observer.error(xhttp.response);
+                    }
+                }
+            }
+            let token = localStorage.getItem('token');
+            if (method == 'PUT') {
+                xhttp.open(method, this.url + `product/${data._id}?token=${token}`, true);
+
+            } else {
+                xhttp.open(method, this.url + 'product?token=' + localStorage.getItem('token'), true);
+            }
+            xhttp.send(formData);
+        })
+    }
+
 }

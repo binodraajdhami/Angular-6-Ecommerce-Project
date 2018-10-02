@@ -11,8 +11,9 @@
         <th>Brand</th>
         <th>Category</th>
         <th>Manu Date</th>
-        <th>Quality</th>
         <th>Price</th>
+        <th>Image</th>
+        <th>Tags</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -23,8 +24,11 @@
         <td>{{prod.brand}}</td>
         <td>{{prod.category}}</td>
         <td>{{prod.manuDate | date:'hh:mm:ss a'}}</td>
-        <td>{{prod.quality}}</td>
         <td>{{prod.price}}</td>
+        <td>
+          <img src="{{imgUrl}}images/{{prod.image}}" width="150px" alt="">
+        </td>
+        <td>{{prod.tags}}</td>
         <td>
           <button routerLink="/product/edit/{{prod._id}}" class="btn btn-info">edit</button>
           <button (click)=deleteProduct(prod._id,i); class="btn btn-danger">delete</button>

@@ -7,8 +7,8 @@
     <label for="brand">Brand</label>
     <input class="form-control" type="text" name="brand" placeholder="brand" [(ngModel)]=product.brand>
     <label for="category">category</label>
-    <input class="form-control" type="text" name="category" placeholder="category" [(ngModel)]="product.category" required
-      #category="ngModel">
+    <input class="form-control" type="text" name="category" placeholder="category" [(ngModel)]="product.category"
+      required #category="ngModel">
     <div class="danger" *ngIf="category.invalid && (category.touched || category.dirty)">
       <div *ngIf="category.errors.required">
         category is required*
@@ -24,8 +24,10 @@
     <input class="form-control" type="date" placeholder=" manuDate" name="manuDate" [(ngModel)]="product.manuDate">
     <label for="tags">Tags</label>
     <input class="form-control" type="text" placeholder=" tags" name="tags" [(ngModel)]="product.tags">
+    <label for="image">Choose Image</label>
+    <input type="file" (change)="fileChangeEvent($event)" name="imageName" [(ngModel)]="product.image">
     <br>
-    <button [disabled]="!addProductForm.valid" *ngIf="!submitting" (click)="add()" class="btn btn-primary">
+    <button [disabled]="!addProductForm.valid" *ngIf="!submitting" (click)="upload()" class="btn btn-primary">
       submit
     </button>
     <button disabled class="btn btn-info" *ngIf="submitting">submitting... </button>
