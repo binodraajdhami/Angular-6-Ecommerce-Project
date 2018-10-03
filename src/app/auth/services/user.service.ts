@@ -56,4 +56,14 @@ export class AuthService extends BaseService {
         return this.http.post(this.url + 'register', data, this.headersOnly())
     }
 
+    forgotPassword(data: User) {
+        return this.http.post(this.url + 'forgotPassword', data, this.headersOnly())
+
+    }
+
+    reset(data: any) {
+        return this.http.post(this.url + 'reset/' + data.token, data, this.headersOnly())
+
+    }
+
 }
