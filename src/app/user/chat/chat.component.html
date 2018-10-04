@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <div style="height:500px;border:1px solid red">
+        <b>{{user.username}}</b>
+        <p>Message Here</p>
+        <li *ngFor="let msg of messages">
+          {{msg}}
+        </li>
+      </div>
+      <div>
+        <form (ngSubmit)="
+          send()">
+          <input type="text" placeholder="message here..." name="msg" [(ngModel)]="msg">
+          <button class=" btn btn-info" type="submit">send</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-6" style="height:500px;border:1px solid red">
+      Active Users
+      <li *ngFor="let user of users">
+        {{user.name}}
+      </li>
+    </div>
+
+
+  </div>
+</div>
