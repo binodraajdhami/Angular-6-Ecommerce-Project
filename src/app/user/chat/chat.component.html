@@ -5,13 +5,15 @@
         <b>{{user.username}}</b>
         <p>Message Here</p>
         <li *ngFor="let msg of messages">
-          {{msg}}
+          {{msg.sender}} : {{msg.msg}}
         </li>
       </div>
       <div>
         <form (ngSubmit)="
           send()">
-          <input type="text" placeholder="message here..." name="msg" [(ngModel)]="msg">
+          <input type="text" (focus)="typing(true)" (focusout)="typing(false)" placeholder="message here..." name="msg"
+            [(ngModel)]="msgBody.msg">
+          <p *ngIf="isTyping">{{nameaaa}} is typing ...</p>
           <button class=" btn btn-info" type="submit">send</button>
         </form>
       </div>
@@ -20,7 +22,7 @@
     <div class="col-6" style="height:500px;border:1px solid red">
       Active Users
       <li *ngFor="let user of users">
-        {{user.name}}
+        <a style="cursor:pointer" (click)="selectUser(user)"> {{user.name}}</a>
       </li>
     </div>
 
